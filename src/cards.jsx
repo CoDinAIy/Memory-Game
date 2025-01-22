@@ -39,7 +39,7 @@ function Image({ index, gif, randomizeCards, gifs, setGifs, setClickedSrc }) {
             <img
                 key={crypto.randomUUID()}
                 onClick={handleClick}
-                className="flex-1 w-64 h-40 rounded"
+                className="flex-1 w-52 h-24 2xl:h-40 2xl:w-72 rounded"
                 src={gif}
                 alt={index}
             />
@@ -52,7 +52,7 @@ function Image({ index, gif, randomizeCards, gifs, setGifs, setClickedSrc }) {
 function Card({text, index, gif, randomizeCards, gifs, setGifs, setCurrentScore, setClickedSrc}) {
         
     return (
-        <div className="bg-white border rounded shadow flex flex-col justify-between max-h-100 max-w-full aspect-w-1 aspect-h-1">
+        <div className="bg-white border rounded shadow flex flex-col ">
             {index !== null ? (
                 <div className="flex-1 self-center">
                 <Image index={index} gif={gif} setCurrentScore={setCurrentScore} randomizeCards={randomizeCards} gifs={gifs} setGifs={setGifs} setClickedSrc={setClickedSrc}/>
@@ -105,7 +105,7 @@ export default function Cards({ currentScore, bestScore, setCurrentScore, setBes
         const getImg = async () => {
             try {
                 const apiKey = '6HUexvwKzDDBQtVLlJCE6RLUUKCT7A8s';
-                const apiEndpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cats&limit=18`;
+                const apiEndpoint = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=cats&limit=12`;
 
                 const response = await fetch(apiEndpoint);
 
@@ -139,21 +139,23 @@ export default function Cards({ currentScore, bestScore, setCurrentScore, setBes
                 currentScore={currentScore}
                 setBestScore={setBestScore}
             />
-            <div className="max-h-full flex-1 m-5 p-2 box-border border-4 border-solid border-black">
-                <div className="grid grid-cols-6 gap-4 max-h-full max-w-full">
-                    {gifs.map((gif, index) => (
-                        <Card
-                            key={index}
-                            text={index + 1}
-                            index={index + 1}
-                            gif={gif}
-                            setGifs={setGifs}
-                            randomizeCards={randomizeCards}
-                            gifs={gifs}
-                            setCurrentScore={setCurrentScore}
-                            setClickedSrc={setClickedSrc}
-                        />
-                    ))}
+            <div className="flex items-center justify-center">
+                <div className="m-5 p-2 box-border ">
+                    <div className="grid grid-cols-4 gap-4">
+                        {gifs.map((gif, index) => (
+                            <Card
+                                key={index}
+                                text={index + 1}
+                                index={index + 1}
+                                gif={gif}
+                                setGifs={setGifs}
+                                randomizeCards={randomizeCards}
+                                gifs={gifs}
+                                setCurrentScore={setCurrentScore}
+                                setClickedSrc={setClickedSrc}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </>
